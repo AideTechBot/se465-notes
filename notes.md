@@ -116,10 +116,13 @@ static public int FindLast(int[] x, int y) {
 ```
 1. Identify and fix the fault
 2. If possible, identify a test case that does not execute the fault
+    
     x = null, y = 3
 3. If possible, identify a test case that executes the fault, but doesn't result in an error state.
+    
     x = [3, 1, 2], y = 2 -> result = 2
 4. If possible, identify a test case that results in an error, but not a failure.
+    
     x = [1, 2, 3], y = 5 -> result = -1
     Error is that i = 0, iteration never happens, pc never reaches line 4 with i = 0.
 5. For the given test case, identify the first error state. Describe the complete state.
