@@ -124,6 +124,7 @@ static public int FindLast(int[] x, int y) {
 4. If possible, identify a test case that results in an error, but not a failure.
     
     `x = [1, 2, 3], y = 5 -> result = -1`
+    
     Error is that `i = 0`, iteration never happens, pc never reaches line 4 with `i = 0`.
 5. For the given test case, identify the first error state. Describe the complete state.
     
