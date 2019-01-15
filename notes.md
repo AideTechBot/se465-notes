@@ -127,4 +127,99 @@ static public int FindLast(int[] x, int y) {
     
     Error is that `i = 0`, iteration never happens, pc never reaches line 4 with `i = 0`.
 5. For the given test case, identify the first error state. Describe the complete state.
-    
+
+---
+```
+class LineSegment:
+  def __init__(self, x1, x2):
+    self.x1 = x1, self.x2 = x2
+
+def intersect(a,b):
+  return (a.x1 < b.x2) & (a.x2 > b.x1)
+```
+**Note: must document whether endpoints are included!!**    
+
+So lets make a Python unit test:
+```
+def test_aAbB(self):
+  a = LineSegment(0,2)
+  b = LineSegement(3,7)
+  self.assertFalse(intersect(a,b))
+  self.assertFalse(intersect(b,a))
+```
+* Satisfies statement coverage(trivially) + branch coverage
+#### Other ways of generating test:
+* Be sure to cover all outputs (or at least all classes of outputs)
+* Generate cases randomly:
+  - but then you neeed to know expected output to verify pass or fail
+  - and it's also hard to hit known interesting points in the problem space
+* Cover all values of logical sub-expressions
+* Cover all interesting combinations of the input classes
+
+### Sketch of proof of correctness of `intersect`
+
+Rename inputs to:
+- `a.x1 = a`
+- `a.x2 = A`
+- `b.x1 = b`
+- `b.x2 = B`
+
+Assume all points distinct(then check assumption)
+
+Write cases:
+- `a=A, c=b, a=B`
+- `b=a, b=A, b=B`
+
+Assume `a < b` (and then swap them)
+
+Assume `a < A` and `b < B` (Contstructor should reject violating lines?)
+
+Have reduced input space to permutations:
+```
+aAbB:  .-----.  .------.
+abAB:  .------.
+            .-------.
+abBa:  .---------------.
+            .------.
+```
+
+### Static Testing ("ahead of time")
+- Linters, other compiler-like tools
+- Human code review
+### Dynamic Testign ("at run-time")
+- Unit tests
+- Observe program behaviour by executing it
+
+### "I don't want to talk about it"
+- Complete testing
+- Exhaustive testing
+- Full coverage
+Please be more precise.
+
+### Test Suite Design - when to stop?
+- Out of time - need to move on.
+- Open ended exploratory testing 
+- Automatic input generation
+- Close enough to being exhaustive(along some dimension)
+- Have enough statements, branches, program states, use cases
+
+#### Test Cases
+Contains inputs and expected outputs.
+
+**Key notions:** 
+- Observability - know what the system is doing/what is the internal state of the system
+- Controlability - Able to feed inputs into the system
+
+#### Coverage
+Identify a space related to the program and cover that space.
+
+- Test requirement - an element of an artifact that a test case must cover
+
+### Working with TR's
+- Formulate a set of TRs, depending on the system.
+- Ensure that some test case meets each.
+**Example:**
+- Cover all decisions(branches) in a program
+- Each branch creates two TRs (one for true, one for false)
+- Cover all methods in a program(each method is one TR)
+
