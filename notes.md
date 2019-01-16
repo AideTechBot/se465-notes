@@ -222,4 +222,51 @@ Identify a space related to the program and cover that space.
 - Cover all decisions(branches) in a program
 - Each branch creates two TRs (one for true, one for false)
 - Cover all methods in a program(each method is one TR)
+---
+### Infeasible test requirements
+Some test requirements are impossible to fulfill
+**Example**: Statement converage is infeasible for many programs
 
+Also code like:
+```
+if(false) {
+  unreachablecall();
+}
+```
+or
+```
+while(0) { local_irq_disable(); }
+```
+can't be tested.
+
+#### Definition:
+Given a set of test requirements `TR` and a test set T, the **coverage level** is the ratio of the # of test requirements satisfied by `T` to the size of `TR`.
+
+**Example:** My test suite achieves 80% statement coverage on this program.
+
+### Exploratory Testing
+- Poke around a system to find bugs
+- You might do hallway usability testing
+Exploratory testing is simultaneous learning, test design, and test execution vs scripted testing (ahead of time/design)
+
+### When is exploratory testing good?
+- Not yet clear what right answer is to the test
+- Don't understand the system
+- Evaluating criteria which are difficult to quantify(eg: Usability)
+### When do you want more scripts/automation?
+- As you better understand the system you should automate
+- Need to run the same tests over and over
+- Regression tests
+### Exploratory Testing Process
+1. Start with a charter for the testing activity.
+**Example:** Analyze the product elements of the software
+2. Decide what area of software to test.
+3. Design a test (informally).
+4. Execute the test, log bugs.
+5. Repeat 2-4.
+
+#### Notes
+- Don't produe exhaustive notes.
+  - Take brief notes, enough to reproduce the bug.
+- Output at least a set of bug reports + maybe test notes(overall impressions, summary of the strategy/thought process)
+- Artifacts, test data/materials
