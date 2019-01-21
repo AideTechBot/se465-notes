@@ -270,3 +270,49 @@ Exploratory testing is simultaneous learning, test design, and test execution vs
   - Take brief notes, enough to reproduce the bug.
 - Output at least a set of bug reports + maybe test notes(overall impressions, summary of the strategy/thought process)
 - Artifacts, test data/materials
+---
+### Source Code Coverage Criteria
+- **Statement coverage:** You have at least one test cas that covers each statement
+- **Branch coverage:** You have at least one test case that covers each branch in the program.
+
+A control flow graph is a graph where the nodes correspond to program statements and edges. (n.n') indicates the successor relation for the Program Counter. (see LaTeX notes given by plam for pictures)
+
+#### [Branch coverage example with picture I'm too lazy to draw so just look at plams notes honestly]
+
+Good test suites should be aware of coverage criteria, but you need to use engineering judgment to say a test suite is good.
+
+So in pathological cases, you can have branch coverage but not statement coverage.
+
+Programming languages (eg Java) prohibit unreachable code, so then branche coverage implies statement coverage.
+
+### How do you get a CFG?
+- Part of the compilation process
+  - **Lexing:** Converting input into tokens
+  - **Parsing:** Converting tokens into an concrete syntax tree
+  - Construct the abstract syntax tree (Clean up the concrete syntax tree)
+  - Convert AST into a CFG
+  - Optimizations on the CFG
+#### Example
+```
+x = 5;
+for(Z : z; z < 17; z++)
+  print(x);
+```
+????? diagrams and stuff ????
+
+honestly this is just really hard to write down cuz plam is not making any sense
+
+### Basic Blocks
+```
+print x
+print y
+```
+You will always(*) run `print y` if you run `print x`
+
+(*) Exceptions break this, as do multithreaded applications 
+
+#### Definition
+A basic block is a sequence of instructions in the CFG that has one entry point and one exit point
+- Usually interested in maximal basic blocks
+- A basic block may have multiple successors
+
